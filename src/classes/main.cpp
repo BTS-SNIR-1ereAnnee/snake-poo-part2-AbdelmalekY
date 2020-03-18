@@ -57,22 +57,26 @@
 		noecho();
 		while (true)
 		{
+
+
 			//SI TOUCHE CLAVIER APPUYEE(HAUT,BAS,GAUCHE,DROITE)
 			if(kbhit()) {
 				switch (getch()){
 					case 259:
-					serpent.move(dirEnCours);
+					dirEnCours = TOUCHE_KEY_UP;
 					break;
 					case 260:
-					serpent.move(dirEnCours);
+					dirEnCours = TOUCHE_KEY_LEFT;
 					break;
 					case 258:
-					serpent.move(dirEnCours);
+					dirEnCours = TOUCHE_KEY_DOWN;
 					break;
 					case 261:
-					serpent.move(dirEnCours);
+					dirEnCours = TOUCHE_KEY_RIGHT;
 					break;
 				}
+
+
 
 			}
 			serpent.move (dirEnCours);
