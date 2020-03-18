@@ -67,3 +67,12 @@ void Board::effacerPoint(Point &p){
 
 }
 
+int Board::getSizeX()
+{
+  return m_sizeX;
+}
+
+int Board::getSizeY()
+{
+  return m_sizeY;
+}
