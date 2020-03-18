@@ -76,8 +76,6 @@
 					break;
 				}
 
-
-
 			}
 			serpent.move (dirEnCours);
 
