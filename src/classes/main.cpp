@@ -26,7 +26,7 @@
 
 		ch = getch();
 		if( ch == ERR)
-			r = FALSE; //faux!
+			r = FALSE; 
 
 		else
 		{
