@@ -67,8 +67,8 @@ void Point::setY(int val)
 void Point::drawPoint()
 {
     Board *b;
-    b = Board::getInstance(); // dessine les points 
-    b->dessinerPoint(*this);
+    b = Board::getInstance(); 
+    b->dessinerPoint(*this);// dessine les points 
 }
 
 void Point::erasePoint()  

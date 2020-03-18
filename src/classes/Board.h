@@ -18,19 +18,19 @@ public:
     static void kill ();
     void dessinerPoint(Point &p);
     void effacerPoint(Point &p);
-    int m_sizeX,m_sizeY;
-
+    
     int getSizeX();
     int getSizeY();
 
-    
+
 private:
     static Board *_singleton;
     WINDOW *m_boite;
     Board();
     ~Board();
     void dessinerPlateau();
-
+    
+    int m_sizeX,m_sizeY;
 };
 
 
