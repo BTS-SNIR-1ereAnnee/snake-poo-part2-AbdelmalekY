@@ -57,35 +57,26 @@
 		noecho();
 		while (true)
 		{
-
-
 			//SI TOUCHE CLAVIER APPUYEE(HAUT,BAS,GAUCHE,DROITE)
 			if(kbhit()) {
 				switch (getch()){
 					case 259:
-					dirEnCours = TOUCHE_KEY_UP;
-					serpent.move(TOUCHE_KEY_UP);
+					serpent.move(dirEnCours);
 					break;
 					case 260:
-					dirEnCours = TOUCHE_KEY_LEFT;
-					serpent.move(TOUCHE_KEY_LEFT);
+					serpent.move(dirEnCours);
 					break;
 					case 258:
-					dirEnCours = TOUCHE_KEY_DOWN;
-					serpent.move(TOUCHE_KEY_DOWN);
+					serpent.move(dirEnCours);
 					break;
 					case 261:
-					dirEnCours = TOUCHE_KEY_RIGHT;
-					serpent.move(TOUCHE_KEY_RIGHT);
+					serpent.move(dirEnCours);
 					break;
 				}
 
-
-
-			}else{ //move left
-				serpent.move (dirEnCours);
-
 			}
+			serpent.move (dirEnCours);
+
 			serpent.affichSerpent();
 			usleep (150000);// vitesse du serpent en micro seconde
 
