@@ -22,6 +22,8 @@ public:
 
     int getSizeX();
     int getSizeY();
+
+    
 private:
     static Board *_singleton;
     WINDOW *m_boite;

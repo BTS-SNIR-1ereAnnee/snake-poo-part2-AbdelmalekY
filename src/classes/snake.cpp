@@ -62,3 +62,13 @@ void snake::move(int direction)
 
 }
 
+
+bool Snake::checkColisionWithBoard()
+{
+    checkColisionWithBoard=FALSE;
+
+    
+
+
+
+}
