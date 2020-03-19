@@ -65,11 +65,15 @@ public:
     *   Affiche les coordonnées
     */
     void debug();
+
+    char getChar();
+    void setChar(char val);
 protected:
 
 private:
     int m_x; //!< Member variable "m_x"
     int m_y; //!< Member variable "m_y"
+    char m_caractere;//MODIF
 };
 
 #endif // POINT_H

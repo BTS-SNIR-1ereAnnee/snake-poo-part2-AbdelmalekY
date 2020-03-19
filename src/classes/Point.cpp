@@ -8,15 +8,33 @@ using namespace std;
 Point::Point()
 {
     m_x = m_y = 10;
-	cout<<"quelque chose"<< endl;
+    m_caractere='*';//modif
 }
+
 Point::Point(int x, int y)
 {
     this->m_x = x;
     this->m_y = y;
-	cout<<"quelque chose"<< endl;
+    m_caractere='*';//modif
 }
 
+Point::Point(int x, int y,char unCar/*modif*/)
+{
+    this->m_x = x;
+    this->m_y = y;
+    m_caractere=unCar;//modif
+}
+
+Point::Point(char unCar/*modif*/)
+{
+    m_x = m_y = 10;
+    m_caractere=unCar;//modif
+}
+
+Point::Point()
+{
+    m_x = m_y = 10;
+}
 void Point::setPoint(int x, int y)
 {
     this->m_x = x;
@@ -67,20 +85,33 @@ void Point::setY(int val)
 void Point::drawPoint()
 {
     Board *b;
-    b = Board::getInstance(); 
-    b->dessinerPoint(*this);// dessine les points 
+    b = Board::getInstance(); // dessine les points
+    b->dessinerPoint(*this);
 }
 
-void Point::erasePoint()  
+void Point::erasePoint()
 {
     Board *b;
-    b = Board::getInstance(); //efface les points 
+    b = Board::getInstance(); //efface les points
     b->effacerPoint(*this);
 }
 
 void Point::debug()
 {
     cout << "(" << this->m_x << "," << this->m_y << ")";
+}
+
+//MODIF
+char Point::getChar()
+{
+    return m_caractere;
+
+}
+
+void Point::setChar(char val)
+{
+    m_caractere=val;
+
 }
 
 Point::~Point()

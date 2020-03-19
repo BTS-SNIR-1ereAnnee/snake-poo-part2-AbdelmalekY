@@ -1,89 +1,90 @@
-	/*
-	 Projet: snake
-	 Auteur: Sylvain Guilbert
-	*/
-	#include <iostream>
-	#include "Point.h"
-	#include "Board.h"
-	#include "snake.h"
-	#include <unistd.h>
+/*
+ Projet: snake
+ Auteur: Sylvain Guilbert
+*/
+#include <iostream>
+#include "Point.h"
+#include "Board.h"
+#include "snake.h"
+#include <unistd.h>
 
-	int usleep(useconds_t usec);
+int usleep(useconds_t usec);
 
-	using namespace std;
+using namespace std;
 
-	//https://github.com/ajpaulson/learning-ncurses/blob/master/kbhit.c
+//https://github.com/ajpaulson/learning-ncurses/blob/master/kbhit.c
 
-	#define  TOUCHE_KEY_UP 1 // sert a définir les touche de mouvement
-	#define  TOUCHE_KEY_DOWN 2
-	#define  TOUCHE_KEY_LEFT 3
-	#define  TOUCHE_KEY_RIGHT 4
+#define  TOUCHE_KEY_UP 1 // sert a définir les touche de mouvement
+#define  TOUCHE_KEY_DOWN 2
+#define  TOUCHE_KEY_LEFT 3
+#define  TOUCHE_KEY_RIGHT 4
 
-	int kbhit(void)    /* Cette fonction retourne si une touche est appuyé par l'utilisateur https://github.com/ajpaulson/learning-ncurses/blob/master/kbhit.c */
-	{
-		int ch, r;
-		nodelay(stdscr, TRUE);
+/** Cette fonction retourne si une touche est appuyé par l'utilisateur
+*   https://github.com/ajpaulson/learning-ncurses/blob/master/kbhit.c
+*/
+int kbhit(void);
 
-		ch = getch();
-		if( ch == ERR)
-			r = FALSE; 
+int main()
+{
+    int directionEnCours=TOUCHE_KEY_DOWN;
 
-		else
-		{
-			r = TRUE;
-			ungetch(ch);
-		}
+    // pointeurs sur l'unique instance de la classe fenetre
+    Board *fenetre;
+    // initialisation des pointeurs
+    fenetre = Board::getInstance ();
 
+    snake serpent(10,4);
 
-		echo();
-		nodelay(stdscr, FALSE);
-		return(r);
-	}
+    keypad (stdscr,true);
+    noecho();
 
-	int main()
-	{
-		int dirEnCours=TOUCHE_KEY_DOWN;//DIRECTION PAR DEFAULT: BAS
+    bool collision = FALSE;
+    while (!collision)
+    {
+        if(kbhit())
+        {
+            switch (getch())
+            {
+            case 259:
+                directionEnCours = TOUCHE_KEY_UP;
+                break;
+            case 260:
+                directionEnCours = TOUCHE_KEY_LEFT;
+                break;
+            case 258:
+                directionEnCours = TOUCHE_KEY_DOWN;
+                break;
+            case 261:
+                directionEnCours = TOUCHE_KEY_RIGHT;
 
-	  // pointeurs sur l'unique instance de la classe UniqueObject
-		Board *fenetre;
-	  // initialisation des pointeurs
-		fenetre = Board::getInstance ();
+                break;
+            }
 
-		snake serpent(10,4);
+        }
+        serpent.move(directionEnCours);
+        collision = serpent.checkColisionWithBoard();
+        serpent.affichSerpent();
+        usleep (150000);
 
+    }
+    //getchar();
+    fenetre->kill();
+    return 0;
+};
 
-
-		keypad (stdscr,true);
-		noecho();
-		while (true)
-		{
-
-
-			//SI TOUCHE CLAVIER APPUYEE(HAUT,BAS,GAUCHE,DROITE)
-			if(kbhit()) {
-				switch (getch()){
-					case 259:
-					dirEnCours = TOUCHE_KEY_UP;
-					break;
-					case 260:
-					dirEnCours = TOUCHE_KEY_LEFT;
-					break;
-					case 258:
-					dirEnCours = TOUCHE_KEY_DOWN;
-					break;
-					case 261:
-					dirEnCours = TOUCHE_KEY_RIGHT;
-					break;
-				}
-
-			}
-			serpent.move (dirEnCours);
-
-			serpent.affichSerpent();
-			usleep (150000);// vitesse du serpent en micro seconde
-
-		}
-	    //getchar();
-		fenetre->kill();
-		return 0;
-	};
+int kbhit(void)    /* Cette fonction retourne si une touche est appuyé par l'utilisateur https://github.com/ajpaulson/learning-ncurses/blob/master/kbhit.c */
+{
+    int ch, r;
+    nodelay(stdscr, TRUE);
+    ch = getch();
+    if( ch == ERR)
+        r = FALSE;
+    else
+    {
+        r = TRUE;
+        ungetch(ch);
+    }
+    echo();
+    nodelay(stdscr, FALSE);
+    return(r);
+}
